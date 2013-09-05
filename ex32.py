@@ -29,5 +29,6 @@ elements = [0, 1, 2, 3, 4, 5]
 # now we can print them out too
 #for i in elements:
 #	print "Element was: %d" % i
+
 print elements
 	

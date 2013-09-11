@@ -1,35 +1,62 @@
-# -*- coding:utf-8 -*-
+# create a mapping of state to abbreviation
+states = {
+	'Oregon': 'OR',
+	'Florida': 'FL',
+	'California': 'CA',
+	'New York': 'NY',
+	'Michigan': 'MI',
+}
 
-# 我们可以在成员名称前添加 "__" 使其成为私有成员
-# python中的class属性分为类属性和实例属性，其中实例属性是可以动态构建的，类属性也可以动态创建
-# 实例属性可以访问类属性，但是类不能访问实例属性
+# create a basic set of states and some cities in them
+cities = {
+	'CA': 'San Francisco',
+	'MI': 'Detroit',
+	'FL': 'Jacksonville'
+}
 
-class Song(object):
-#	song_lyrics = 'class attribute' # Song_lyrics 是类属性
-	def __init__(self, lyrics):
-		self.lyrics = lyrics # lyrics 是实例属性
-#		song_lyrics = lyrics # song_lyrics 只是一个局部变量，不是上面的类属性
-#		Song.song_lyrics = lyrics # 创建类属性要用 类名.Attribute = object
-		
-	def sing_me_a_song(self):
-		for line in self.lyrics:
-			print line
-			
-#	def sing(self):
-#		for line in song_lyrics:
-#			print line
-			
-happy_bday = Song(["Happy birthday to you", 
-				"I don't want to get sued",
-				"So I'll stop right there"])
+# add some more cities
+cities['NY'] = 'New York'
+cities['OR'] = 'Protland'
+
+#print out some cities
+print '-' * 10
+print "NY States has: ", cities['NY']
+print "OR States has: ", cities['OR']
+
+# print some states
+print '-' * 10
+print "Michigan's abbreviation is: ", states['Michigan']
+print "Florida's abbreviation is: ", states['Florida']
+
+# do it by using the state the cities dict
+print '-' * 10
+print "Michigan has: ", cities[states['Michigan']]
+print "Florida has: ", cities[states['Florida']]
+
+# print every state abbreviation
+print '-' * 10
+for state, abbrev in states.items():
+	print "%s is abbreviated %s" % (state, abbrev)
 	
-bulls_on_parade = Song(["They rally around the family",
-					"With pockets full of shells"])
-					
-happy_bday.sing_me_a_song()
+# print every city in state
+print '-' * 10
+for abbrev, city in cities.items():
+	print "%s has the city %s" % (abbrev, city)
+	
+# now do both at the same time
+print '-' * 10
+for state, abbrev in states.items():
+	print "%s state is abbreviated %s and has city %s" % (state, abbrev, cities[abbrev])
+	
+print '-' * 10
+# safely get a abbreviation by state that might not be there
+state = states.get('Texas', None)
 
-Song.song_lyrics = "class attribute" # 动态创建类属性
-#bulls_on_parade.song_lyrics = 'modify'
-print bulls_on_parade.song_lyrics
+if not state:
+	print "Sorry, no Texas"
+	
+# get a city with a default value
+city = cities.get('TX', 'Does Not Exist')
+print "The city for the state 'TX' is: %s" % city
 
-print Song.song_lyrics
+print isinstance(city, str)
